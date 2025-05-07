@@ -1,4 +1,5 @@
 #include <iostream>
+#include <fstream>
 #include <string>
 #include <json.h>
 
@@ -36,6 +37,28 @@ int main()
     Json::FastWriter fastwriter;
     std::string stringc = fastwriter.write(root); //将JSON值以紧凑的方式格式化为带缩进和换行符的字符串
     std::cout << "StringC: " << stringc << std::endl;
+
+
+    ofstream fileroot("fileroot.json");
+    fileroot << root;
+    fileroot.close();
+
+    Json::StreamWriterBuilder builder;
+    ofstream filebuilder("filebuilder.json");
+    filebuilder << Json::writeString(builder, root);
+    filebuilder.close();
+
+    ofstream filea("filea.json"); //与fileroot相比，文件末尾会多一个换行符
+    filea << stringa;
+    filea.close();
+
+    ofstream fileb("fileb.json");
+    fileb << stringb;
+    fileb.close();
+
+    ofstream filec("filec.json");
+    filec << stringc;
+    filec.close();
 
 
     Json::Value data;
