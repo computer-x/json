@@ -7,12 +7,32 @@ using namespace std;
 
 int main()
 {
+    //根对象
     Json::Value root;
+    //顶级字段
     root["name"] = "bob";
-    root["age"] = 18;
+    root["age"] = 40;
     root["index"] = "23";
     string city = "city";
     root[city] = "Xi'an";
+
+    //嵌套对象
+    Json::Value sub;
+    sub["name"] = "david";
+    sub["age"] = 18;
+    root["son"] = sub;
+
+    //数组
+    Json::Value tags;
+    tags.append("basketball");
+    tags.append("music");
+    tags.append("read");
+    root["like"] = tags;
+
+    //字符串值
+    Json::Value aaa = "aaa";
+    root["aaa_test"] = aaa;
+
 
     string name = root["name"].asString();
     cout << "name: " << name << endl;
@@ -24,8 +44,8 @@ int main()
     cout << "index: " << index << endl;
     //int index1 = root["index"].asInt(); //error
     //cout << "index1: " << index1 << endl;
-    cout << endl;
 
+    cout << "==================================================" << endl;
 
     std::string stringa = root.toStyledString(); //将JSON值格式化为带缩进和换行符的字符串
     std::cout << "StringA: " << stringa << std::endl;
@@ -38,6 +58,7 @@ int main()
     std::string stringc = fastwriter.write(root); //将JSON值以紧凑的方式格式化为带缩进和换行符的字符串
     std::cout << "StringC: " << stringc << std::endl;
 
+    cout << "==================================================" << endl;
 
     ofstream fileroot("fileroot.json");
     fileroot << root;
